@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Produk Indonesia</title>
+  <meta name="description" content="Cari produk Indonesia berdasarkan nama atau barcode.">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="ProdukID">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="offline" class="banner" hidden>Anda sedang offline. Hanya data yang pernah dibuka yang tersedia.</div>
+
+  <header class="top">
+    <h1>Produk Indonesia</h1>
+    <div class="top-actions">
+      <button id="install" class="ghost" hidden>Pasang</button>
+      <button id="settings-btn" class="ghost" aria-label="Pengaturan">Pengaturan</button>
+    </div>
+  </header>
+
+  <main>
+    <form id="search-form" role="search" autocomplete="off">
+      <label for="q" class="sr">Nama produk atau barcode</label>
+      <input id="q" name="q" type="search" inputmode="search" placeholder="Nama produk atau barcode…" maxlength="100" required>
+      <button type="submit" class="primary">Cari</button>
+      <button type="button" id="scan-btn" class="secondary" hidden>Scan</button>
+    </form>
+    <p class="hint">Angka 8–14 digit dicari sebagai barcode, selain itu sebagai nama (minimal 2 huruf).</p>
+
+    <section id="history-wrap" hidden>
+      <div class="row"><h2>Pencarian terakhir</h2><button id="clear-history" class="link">Hapus</button></div>
+      <div id="history" class="chips"></div>
+    </section>
+
+    <p id="status" role="status" aria-live="polite"></p>
+    <ul id="results" class="cards"></ul>
+    <button id="more" class="secondary wide" hidden>Muat lebih banyak</button>
+  </main>
+
+  <footer>
+    <small>Harga pada data hanyalah angka acak (data demo). Sumber: API Produk Indonesia.</small>
+  </footer>
+
+  <dialog id="detail">
+    <form method="dialog"><button class="close" aria-label="Tutup">×</button></form>
+    <h2 id="d-name"></h2>
+    <img id="d-img" alt="Gambar barcode" hidden>
+    <dl>
+      <dt>Barcode</dt><dd id="d-barcode"></dd>
+      <dt>Harga (acak)</dt><dd id="d-price"></dd>
+      <dt>Satuan</dt><dd id="d-uom"></dd>
+    </dl>
+    <button id="d-copy" class="secondary wide">Salin barcode</button>
+  </dialog>
+
+  <dialog id="scanner">
+    <form method="dialog"><button class="close" id="scan-close" aria-label="Tutup">×</button></form>
+    <h2>Arahkan kamera ke barcode</h2>
+    <video id="video" playsinline muted></video>
+    <p id="scan-msg" class="hint"></p>
+  </dialog>
+
+  <dialog id="settings">
+    <form method="dialog"><button class="close" aria-label="Tutup">×</button></form>
+    <h2>Pengaturan</h2>
+    <label for="api-url">URL API</label>
+    <input id="api-url" type="url" inputmode="url" placeholder="https://…/api/v1">
+    <div class="row">
+      <button id="api-save" class="primary">Simpan</button>
+      <button id="api-reset" class="secondary">Reset</button>
+    </div>
+    <p id="version" class="hint"></p>
+  </dialog>
+
+  <noscript><p style="padding:1rem">Aplikasi ini membutuhkan JavaScript.</p></noscript>
+  <script src="app.js" defer></script>
+</body>
+</html>
